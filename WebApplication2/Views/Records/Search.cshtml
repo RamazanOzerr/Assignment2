@@ -1,0 +1,64 @@
+﻿@model WebApplication2.Models.Record
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search by Name</h1>
+
+<h3>Enter the name to search for records:</h3>
+<div>
+    <form asp-action="Search" method="post">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </form>
+</div>
+
+
+
+<div id="recordList" style="display:block;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Age)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
